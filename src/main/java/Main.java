@@ -7,29 +7,29 @@ import java.util.StringTokenizer;
 public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        String input = br.readLine();
 
-        int[] arr = new int[10];
-        for(int i = 0; i < input.length(); i++) {
-            int num = input.charAt(i) - '0';
-            if(num == 6) {
-                arr[9]++;
-            }else {
-                arr[num]++;
-            }
+        int N = Integer.parseInt(br.readLine());
+
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        int[] arr = new int[N];
+        for(int i = 0; i < N; i++) arr[i] = Integer.parseInt(st.nextToken());
+        Arrays.sort(arr);
+
+        int x = Integer.parseInt(br.readLine());
+
+        int count = 0;
+        int start = 0;
+        int end = N - 1;
+        int sum = 0;
+
+        while(start < end) {
+            sum = arr[start] + arr[end];
+            if(sum == x) count++;
+            if(sum <= x) start++;
+            else end--;
         }
 
-        int max = 0;
-        for(int j = 0; j < 9; j++) {
-            max = Math.max(max, arr[j]);
-        }
-
-        int nine = arr[9] / 2;
-        if(arr[9] % 2 == 1) nine++;
-
-        max = Math.max(max, nine);
-
-        System.out.println(max);
-
+        System.out.println(count);
     }
 }
+
